@@ -1,0 +1,14 @@
+{
+  "appName": {
+    "message": "RAG Markdown Scraper"
+  },
+  "appDesc": {
+    "message": "将网页转换为适用于 RAG 和 LLM 的纯净 Markdown。"
+  },
+  "btnCopy": {
+    "message": "复制 Markdown"
+  },
+  "statusParsing": {
+    "message": "正在解析..."
+  }
+}
