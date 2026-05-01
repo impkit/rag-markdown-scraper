@@ -16,6 +16,7 @@ RAG Markdown Scraper is a focused, lightweight browser extension designed for AI
   - `excerpt`: Short summary/description
   - `scraped_at`: ISO 8601 timestamp
   - `length`: Content character count
+- **Multi-language Support:** Interface available in English, Spanish, Chinese, German, French, and Russian.
 - **Privacy First:** 100% client-side processing. Your data never leaves your machine.
 - **Atomic & Fast:** No bloat, no complex UI. Just the data you need for your LLM context.
 
