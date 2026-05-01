@@ -1,0 +1,15 @@
+{
+  "appName": {
+    "message": "RAG Markdown Scraper"
+  },
+  "appDesc": {
+    "message": "Convert web pages to clean Markdown for RAG and LLM."
+  },
+  "btnCopy": {
+    "message": "Copy Markdown"
+  },
+  "statusParsing": {
+    "message": "Parsing in progress..."
+  }
+}
+
