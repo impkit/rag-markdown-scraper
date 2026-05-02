@@ -16,13 +16,12 @@ RAG Markdown Scraper is a focused, lightweight browser extension designed for AI
   - `excerpt`: Short summary/description
   - `scraped_at`: ISO 8601 timestamp
   - `length`: Content character count
-- **Multi-language Support:** Interface available in English, Spanish, Chinese, German, French, and Russian.
 - **Privacy First:** 100% client-side processing. Your data never leaves your machine.
 - **Atomic & Fast:** No bloat, no complex UI. Just the data you need for your LLM context.
 
 ## 🚀 How to Install (Early Access)
 
-Since we are in the "Early Imp" stage, you can install the extension manually in developer mode:
+Install the extension manually in developer mode:
 
 1. **Download** this repository as a ZIP and extract it.
 2. Open Chrome and navigate to `chrome://extensions/`.
@@ -39,11 +38,16 @@ Since we are in the "Early Imp" stage, you can install the extension manually in
 
 ## ❤️ Support & Community
 
-This is a "Project of the Day" by **ImpKit**. We are currently focused on improving the tool and gathering feedback.
+ImpKit creates atomic, high-utility tools for the AI ecosystem. If this scraper saved you LLM tokens or manual cleanup, feel free to support our development:
+
+- **Solana (SOL):** `4tEi58Phj4VMFn1u3R9ojfLEPz7CbZHtGdmXxsHR17rV`
+- **USDT (TRC-20):** `TT5yhYk9tFeazFSBbVxYBofAf1wyMarMBu`
+
+---
 
 - **Feedback:** Found a bug? Have a feature request? Please [open an Issue](https://github.com).
-- **Support:** If you like what we're building, simply **Star ⭐** this repository. It helps our imps work harder!
-- **Future Updates:** Payment gateways and a Pro version are coming soon. Follow this repo to stay tuned.
+- **Support:** If you are not into crypto, simply **Star ⭐** this repository. Every star helps us grow!
+- **Roadmap:** Pro version with batch export and custom YAML templates is in development.
 
 ## 📬 Contact
 
