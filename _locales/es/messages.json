@@ -3,10 +3,10 @@
     "message": "RAG Markdown Scraper"
   },
   "appDesc": {
-    "message": "Convierte páginas web en Markdown limpio para RAG y LLM."
+    "message": "Convierte páginas web en Markdown limpio para RAG и LLM."
   },
   "btnCopy": {
-    "message": "Copiar Markdown"
+    "message": "Copiar Markdown + YAML"
   },
   "statusParsing": {
     "message": "Procesando..."

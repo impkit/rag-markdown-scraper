@@ -6,10 +6,9 @@
     "message": "Конвертируйте веб-страницы в чистый Markdown для RAG и LLM."
   },
   "btnCopy": {
-    "message": "Копировать Markdown"
+    "message": "Копировать Markdown + YAML"
   },
   "statusParsing": {
     "message": "Парсинг..."
   }
 }
-

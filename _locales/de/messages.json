@@ -6,7 +6,7 @@
     "message": "Konvertieren Sie Webseiten in sauberes Markdown für RAG und LLM."
   },
   "btnCopy": {
-    "message": "Markdown kopieren"
+    "message": "Markdown + YAML kopieren"
   },
   "statusParsing": {
     "message": "Parsing läuft..."

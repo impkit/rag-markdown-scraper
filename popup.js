@@ -1,55 +1,56 @@
 document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('scrapeBtn').innerText = chrome.i18n.getMessage("btnCopy");
-});
 
-document.getElementById('scrapeBtn').addEventListener('click', async () => {
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  const scrapeBtn = document.getElementById('scrapeBtn');
   const status = document.getElementById('status');
-  
-  status.innerText = chrome.i18n.getMessage("statusParsing");
 
-  try {
-    // Внедряем библиотеки по очереди
-    await chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      files: ['libs/Readability.js', 'libs/turndown.js']
-    });
-
-    // Запускаем сам скрипт парсинга
-    const results = await chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      func: scrapePageLogic // функция описана ниже
-    });
-
-    const result = results[0].result;
-
-    if (result.error) {
-      status.innerText = "Error: " + result.error;
-    } else {
-      // Копируем в буфер обмена
-      await navigator.clipboard.writeText(result.data);
-      status.innerText = "Copied to clipboard!";
-
-    const originalBtnText = document.getElementById('scrapeBtn').innerText;
-    document.getElementById('scrapeBtn').innerText = "✓ Copied!";
-    setTimeout(() => {
-      document.getElementById('scrapeBtn').innerText = originalBtnText;
-      status.innerText = "";
-    }, 2000);
-
-
-
-    }
-  } catch (err) {
-    status.innerText = "Fatal Error: " + err.message;
-    console.error(err);
+  if (scrapeBtn) {
+    scrapeBtn.innerText = chrome.i18n.getMessage("btnCopy");
   }
+
+  scrapeBtn.addEventListener('click', async () => {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    
+    if (status) {
+      status.innerText = chrome.i18n.getMessage("statusParsing");
+    }
+
+    try {
+      await chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        files: ['libs/Readability.js', 'libs/turndown.js']
+      });
+
+      const results = await chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        func: scrapePageLogic
+      });
+
+      const result = results[0].result;
+
+      if (result.error) {
+        if (status) status.innerText = "Error: " + result.error;
+      } else {
+        await navigator.clipboard.writeText(result.data);
+        
+        if (status) status.innerText = "Copied to clipboard!";
+
+        const originalBtnText = scrapeBtn.innerText;
+        scrapeBtn.innerText = "✓ Copied!";
+        
+        setTimeout(() => {
+          scrapeBtn.innerText = originalBtnText;
+          if (status) status.innerText = "";
+        }, 2000);
+      }
+    } catch (err) {
+      if (status) status.innerText = "Fatal Error: " + err.message;
+      console.error(err);
+    }
+  });
 });
 
-// Логика парсинга, которая выполнится на странице
 function scrapePageLogic() {
   try {
-    // 1. Проверка наличия библиотек (на случай сбоя инжекта)
     if (typeof Readability === 'undefined' || typeof TurndownService === 'undefined') {
       return { error: "Libraries not loaded. Please refresh the page." };
     }
@@ -66,8 +67,6 @@ function scrapePageLogic() {
     });
 
     const markdown = turndownService.turndown(article.content);
-
-    // Функция для безопасной вставки в YAML
     const escapeYaml = (str) => `"${(str || '').replace(/"/g, '\\"')}"`;
 
     const data = [
@@ -90,4 +89,3 @@ function scrapePageLogic() {
     return { error: e.message };
   }
 }
-
