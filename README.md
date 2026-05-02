@@ -9,7 +9,7 @@ RAG Markdown Scraper is a focused, lightweight browser extension designed for AI
 ## 📸 Visual Demo
 
 <details>
-  <summary>📸 Click to view Visual Demo (Screenshots)</summary>
+  <summary>Click to view Visual Demo (Screenshots)</summary>
 
 ### 1. Identify the target content
 ![Source Page](./assets/01_context.png)
