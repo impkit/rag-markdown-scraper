@@ -63,7 +63,7 @@ ImpKit creates atomic, high-utility tools for the AI ecosystem. If this scraper 
 
 ---
 
-- **Feedback:** Found a bug? Have a feature request? Please [open an Issue](https://github.com).
+- **Feedback:** Found a bug? Have a feature request? Please [open an Issue](https://github.com/impkit/rag-markdown-scraper/issues).
 - **Support:** If you are not into crypto, simply **Star ⭐** this repository. Every star helps us grow!
 - **Roadmap:** Pro version with batch export and custom YAML templates is in development.
 
