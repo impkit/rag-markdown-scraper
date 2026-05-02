@@ -31,8 +31,8 @@ Install the extension manually in developer mode:
 ## 🛠 Tech Stack
 
 - **Manifest V3** (Chrome Extension API)
-- [Readability.js](https://github.com) - Content extraction.
-- [Turndown.js](https://github.com) - HTML to Markdown conversion.
+- [Readability.js](https://github.com/mozilla/readability) - Content extraction.
+- [Turndown.js](https://github.com/mixmark-io/turndown) - HTML to Markdown conversion.
 
 ---
 
