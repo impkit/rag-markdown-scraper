@@ -6,6 +6,19 @@ RAG Markdown Scraper is a focused, lightweight browser extension designed for AI
 
 ---
 
+## 📸 Visual Demo
+
+### 1. Identify the target content
+![Source Page](./assets/01_source.png)
+
+### 2. Run the Scraper (One-click)
+![Extension Popup](./assets/02_popup.png)
+
+### 3. Get Structured Markdown + YAML
+![Resulting Markdown](./assets/03_result.png)
+
+---
+
 ## ✨ Key Features
 
 - **Noise-Free Extraction:** Powered by Mozilla's Readability engine to remove ads, sidebars, and menus.
@@ -31,8 +44,8 @@ Install the extension manually in developer mode:
 ## 🛠 Tech Stack
 
 - **Manifest V3** (Chrome Extension API)
-- [Readability.js](https://github.com/mozilla/readability) - Content extraction.
-- [Turndown.js](https://github.com/mixmark-io/turndown) - HTML to Markdown conversion.
+- [Readability.js](https://github.com/mozilla/readability) — Content extraction engine by Mozilla.
+- [Turndown.js](https://github.com/mixmark-io/turndown) — HTML to Markdown conversion.
 
 ---
 
