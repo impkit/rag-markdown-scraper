@@ -27,6 +27,7 @@ RAG Markdown Scraper is a focused, lightweight browser extension designed for AI
 ## ✨ Key Features
 
 - **Noise-Free Extraction:** Powered by Mozilla's Readability engine to remove ads, sidebars, and menus.
+- **Structural Integrity:** Unique handling of complex and **nested tables** via semantic HTML preservation — no more broken data rows in your LLM context.
 - **RAG-Native Metadata:** Automatically generates a YAML frontmatter block with:
   - `title`: Page title (YAML-escaped)
   - `url`: Direct source link
@@ -34,8 +35,17 @@ RAG Markdown Scraper is a focused, lightweight browser extension designed for AI
   - `excerpt`: Short summary/description
   - `scraped_at`: ISO 8601 timestamp
   - `length`: Content character count
-- **Privacy First:** 100% client-side processing. Your data never leaves your machine.
+- **Privacy First:** 100% client-side processing. Your data never leaves your machine. No accounts, no APIs, no tracking.
 - **Atomic & Fast:** No bloat, no complex UI. Just the data you need for your LLM context.
+
+## 🧠 Why it's better for RAG?
+
+Standard "Reader Mode" extensions often convert complex tables into a mess of pipes and dashes that small LLMs (like Llama 3 or Mistral) fail to parse correctly. 
+
+**ImpKit Scraper** preserves the hierarchical structure of tables using clean HTML injection within the Markdown. This ensures that:
+1. **Nested tables** remain readable.
+2. **Contextual relationships** between rows and columns are preserved.
+3. **Token usage** is optimized by avoiding redundant markdown formatting characters.
 
 ## 🚀 How to Install (Early Access)
 
@@ -64,12 +74,12 @@ ImpKit creates atomic, high-utility tools for the AI ecosystem. If this scraper 
 ---
 
 - **Feedback:** Found a bug? Have a feature request? Please [open an Issue](https://github.com/impkit/rag-markdown-scraper/issues).
-- **Support:** If you are not into crypto, simply **Star ⭐** this repository. Every star helps us grow!
-- **Roadmap:** Pro version with batch export and custom YAML templates is in development.
+- **Support:** If you are not into crypto, simply **Star ⭐** this repository. Every star helps us grow! **Reach 100 stars to unlock the PRO version features.**
+- **Roadmap:** Pro version with batch export, token counter, and custom YAML templates is in development.
 
 ## 📬 Contact
 
 Reach us at **impkit.dev@gmail.com** for inquiries or collaboration.
 
 ---
-*Built with atomic precision by ImpKit Labs.* 
+*Built with atomic precision by ImpKit Labs.*

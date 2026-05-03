@@ -66,6 +66,17 @@ function scrapePageLogic() {
       hr: '---'
     });
 
+    // --- ДОБАВЛЕННОЕ ПРАВИЛО ДЛЯ ВЛОЖЕННЫХ ТАБЛИЦ ---
+  turndownService.addRule('allTables', {
+  filter: 'table',
+  replacement: function (content, node) {
+    // Забираем вообще все таблицы в HTML, чтобы гарантировать 
+    // сохранность структуры для RAG без лишних библиотек
+    return '\n\n' + node.outerHTML + '\n\n';
+  }
+});
+    // ----------------------------------------------
+
     const markdown = turndownService.turndown(article.content);
     const escapeYaml = (str) => `"${(str || '').replace(/"/g, '\\"')}"`;
 
@@ -89,3 +100,4 @@ function scrapePageLogic() {
     return { error: e.message };
   }
 }
+
