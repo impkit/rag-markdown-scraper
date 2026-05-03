@@ -47,9 +47,6 @@ Standard "Reader Mode" extensions often convert complex tables into a mess of pi
 2. **Contextual relationships** between rows and columns are preserved.
 3. **Token usage** is optimized by avoiding redundant markdown formatting characters.
 
-## 🚀 How to Install (Early Access)
-
-Install the extension manually in developer mode:
 
 ## 🚀 How to Install (Early Access)
 
