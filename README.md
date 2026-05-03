@@ -51,10 +51,16 @@ Standard "Reader Mode" extensions often convert complex tables into a mess of pi
 
 Install the extension manually in developer mode:
 
-1. **Download** this repository as a ZIP and extract it.
-2. Open Chrome and navigate to `chrome://extensions/`.
-3. Enable **"Developer mode"** (toggle in the top right).
-4. Click **"Load unpacked"** and select the folder where you extracted the files.
+## 🚀 How to Install (Early Access)
+
+Install the extension manually in developer mode:
+
+1. **Download** the latest clean build: **[rag-markdown-scraper-v0.1.0.zip](https://github.com/impkit/rag-markdown-scraper/releases/download/v0.1.0-alpha/rag-markdown-scraper-v0.1.0.zip)**.
+2. **Extract** the ZIP archive to a local folder.
+3. Open Chrome and navigate to `chrome://extensions/`.
+4. Enable **"Developer mode"** (toggle in the top right).
+5. Click **"Load unpacked"** and select the folder where you extracted the files.
+
 
 ## 🛠 Tech Stack
 
