@@ -8,18 +8,28 @@ RAG Markdown Scraper is a focused, lightweight browser extension designed for AI
 
 ## 📸 Visual Demo
 
+
 <details>
   <summary>Click to view Visual Demo (Screenshots)</summary>
-
-### 1. Identify the target content
-![Source Page](./assets/01_context.png)
-
-### 2. Run the Scraper (One-click)
-![Extension Popup](./assets/02_interface.png)
-
-### 3. Get Structured Markdown + YAML
-![Resulting Markdown](./assets/03_output.png)
-
+  <br />
+  <div align="center">
+    <table  border="0" cellpadding="10">
+      <tr>
+        <td align="center" width="33%" valign="top">
+          <b>1. Identify target content</b><br />
+          <img src="./assets/01_context.png" alt="Source Page" />
+        </td>
+        <td align="center" width="33%" valign="top">
+          <b>2. Run the Scraper</b><br />
+          <img src="./assets/02_interface.png" alt="Extension Popup" />
+        </td>
+        <td align="center" width="33%" valign="top">
+          <b>3. Get RAG Markdown</b><br />
+          <img src="./assets/03_output.png" alt="Resulting Markdown" />
+        </td>
+      </tr>
+    </table>
+  </div>
 </details>
 
 ---
@@ -52,7 +62,7 @@ Standard "Reader Mode" extensions often convert complex tables into a mess of pi
 
 Install the extension manually in developer mode:
 
-1. **Download** the latest clean build: **[rag-markdown-scraper-v0.1.0.zip](https://github.com/impkit/rag-markdown-scraper/releases/download/v0.1.0-alpha/rag-markdown-scraper-v0.1.0.zip)**.
+1. **Download** the latest clean build from the **[Releases page](https://github.com/impkit/rag-markdown-scraper/releases)**.
 2. **Extract** the ZIP archive to a local folder.
 3. Open Chrome and navigate to `chrome://extensions/`.
 4. Enable **"Developer mode"** (toggle in the top right).
