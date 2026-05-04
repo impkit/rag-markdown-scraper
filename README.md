@@ -69,6 +69,17 @@ Install the extension manually in developer mode:
 5. Click **"Load unpacked"** and select the folder where you extracted the files.
 
 
+### Comparison: Table Handling
+
+
+| Feature | Generic Scrapers | ImpKit RAG Scraper |
+| :--- | :--- | :--- |
+| **Nested Tables** | Broken layout / Data loss | **Preserved via Semantic HTML** |
+| **Noise (Ads/Menus)** | Often included | **Stripped by Readability engine** |
+| **Metadata** | Missing | **Rich YAML Frontmatter** |
+| **LLM Context** | Needs manual cleanup | **LLM-Ready (Instant Paste)**
+
+
 ## 🛠 Tech Stack
 
 - **Manifest V3** (Chrome Extension API)
