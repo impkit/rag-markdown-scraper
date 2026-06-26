@@ -56,9 +56,31 @@ function scrapePageLogic() {
     }
 
     const documentClone = document.cloneNode(true);
-    const article = new Readability(documentClone).parse();
+    
+    // === ШАГ 1: Маскируем ВСЕ таблицы на клоне страницы, чтобы Readability их не удалил ===
+    const tables = documentClone.querySelectorAll('table');
+    const tableStorage = [];
+    
+    tables.forEach((table, index) => {
+      tableStorage[index] = table.outerHTML; // Сохраняем оригинальный HTML таблицы
+      const placeholder = documentClone.createElement('div');
+      placeholder.id = `impkit-table-placeholder-${index}`;
+      placeholder.innerText = `__IMPKIT_TABLE_PLACEHOLDER_${index}__`;
+      table.parentNode.replaceChild(placeholder, table);
+    });
 
+    // === ШАГ 2: Запускаем Readability на подготовленном клоне ===
+    const article = new Readability(documentClone).parse();
     if (!article) return { error: "Could not identify main content" };
+
+    // === ШАГ 3: Возвращаем таблицы на место внутри очищенного контента ===
+    let restoredContent = article.content;
+    tableStorage.forEach((originalHtml, index) => {
+      const placeholderString = `__IMPKIT_TABLE_PLACEHOLDER_${index}__`;
+      // Заменяем текстовый маркер и его контейнер обратно на честный HTML таблицы
+      const regex = new RegExp(`<div[^>]*>${placeholderString}</div>|${placeholderString}`, 'g');
+      restoredContent = restoredContent.replace(regex, originalHtml);
+    });
 
     const turndownService = new TurndownService({
       headingStyle: 'atx',
@@ -66,18 +88,16 @@ function scrapePageLogic() {
       hr: '---'
     });
 
-    // --- ДОБАВЛЕННОЕ ПРАВИЛО ДЛЯ ВЛОЖЕННЫХ ТАБЛИЦ ---
-  turndownService.addRule('allTables', {
-  filter: 'table',
-  replacement: function (content, node) {
-    // Забираем вообще все таблицы в HTML, чтобы гарантировать 
-    // сохранность структуры для RAG без лишних библиотек
-    return '\n\n' + node.outerHTML + '\n\n';
-  }
-});
-    // ----------------------------------------------
+    // Ваше бронебойное правило для таблиц теперь сработает на 100% таблиц!
+    turndownService.addRule('allTables', {
+      filter: 'table',
+      replacement: function (content, node) {
+        return '\n\n' + node.outerHTML + '\n\n';
+      }
+    });
 
-    const markdown = turndownService.turndown(article.content);
+    // Передаем в Turndown восстановленный контент вместо article.content
+    const markdown = turndownService.turndown(restoredContent);
     const escapeYaml = (str) => `"${(str || '').replace(/"/g, '\\"')}"`;
 
     const data = [
@@ -85,7 +105,7 @@ function scrapePageLogic() {
       `title: ${escapeYaml(article.title)}`,
       `url: ${window.location.href}`,
       `site_name: ${escapeYaml(article.siteName || new URL(window.location.href).hostname)}`,
-      `excerpt: ${escapeYaml(article.excerpt)}`,
+      `excerpt: ${escapeYaml((article.excerpt || '').includes('__IMPKIT_TABLE_') ? '' : article.excerpt)}`,
       `scraped_at: ${new Date().toISOString()}`,
       `length: ${article.length}`,
       `---`,

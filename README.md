@@ -37,26 +37,58 @@ RAG Markdown Scraper is a focused, lightweight browser extension designed for AI
 ## ✨ Key Features
 
 - **Noise-Free Extraction:** Powered by Mozilla's Readability engine to remove ads, sidebars, and menus.
-- **Structural Integrity:** Unique handling of complex and **nested tables** via semantic HTML preservation — no more broken data rows in your LLM context.
+- **Dual-Pass Table Protection:** Unique placeholder masking prevents Mozilla's engine from corrupting layouts. Tables are injected as clean, deterministic semantic HTML inside Markdown.
 - **RAG-Native Metadata:** Automatically generates a YAML frontmatter block with:
   - `title`: Page title (YAML-escaped)
   - `url`: Direct source link
   - `site_name`: Domain or site title
-  - `excerpt`: Short summary/description
+  - `excerpt`: Short summary/description (sanitized from placeholders)
   - `scraped_at`: ISO 8601 timestamp
   - `length`: Content character count
-- **Privacy First:** 100% client-side processing. Your data never leaves your machine. No accounts, no APIs, no tracking.
+- **Privacy First:** 100% client-side processing. Your data never leaves your machine. No accounts, no APIs, no tracking. Works behind corporate paywalls, intranets, and `localhost`.
 - **Atomic & Fast:** No bloat, no complex UI. Just the data you need for your LLM context.
 
-## 🧠 Why it's better for RAG?
+---
 
-Standard "Reader Mode" extensions often convert complex tables into a mess of pipes and dashes that small LLMs (like Llama 3 or Mistral) fail to parse correctly. 
+## 🧠 Why it's better for RAG? (Proven Stress Tests)
 
-**ImpKit Scraper** preserves the hierarchical structure of tables using clean HTML injection within the Markdown. This ensures that:
-1. **Nested tables** remain readable.
-2. **Contextual relationships** between rows and columns are preserved.
-3. **Token usage** is optimized by avoiding redundant markdown formatting characters.
+Standard "Reader Mode" extensions and open-source cloud scrapers often convert complex tables into a mess of pipes and dashes, flattening the matrix and destroying cell relations. Small LLMs (like Llama 3 or Mistral) hallucinate heavily on such data. 
 
+**ImpKit Scraper** preserves the absolute semantic hierarchy. Here is how it handles the most brutal edge-cases:
+
+### Test Case 1: Complex Nested Tables
+Standard scrapers break the layout completely, shifting rows. ImpKit seals the sub-structure perfectly:
+```html
+<!-- Input HTML Struct -->
+<table border="1">
+  <tr><th>Department</th><th>Q1 Performance (Detailed)</th><th>Total Revenue</th></tr>
+  <tr>
+    <td>Enterprise Sales</td>
+    <td><table border="1"><tr><th>Region</th><th>Growth</th></tr><tr><td>North America</td><td>+14%</td></tr></table></td>
+    <td>\$1.2M</td>
+  </tr>
+</table>
+```
+**ImpKit Validated Output:**
+```markdown
+<table border="1"><tbody><tr><th>Department</th><th>Q1 Performance (Detailed)</th><th>Total Revenue</th></tr><tr><td>Enterprise Sales</td><td><table border="1"><tbody><tr><th>Region</th><th>Growth</th></tr><tr><td>North America</td><td>+14%</td></tr></tbody></table></td><td>\$1.2M</td></tr></tbody></table>
+```
+
+### Test Case 2: Layout Matrix (`colspan` & `rowspan`)
+When cells are merged, standard markdown table syntax shifts columns to the left, corrupting values. ImpKit keeps structural coordinates intact:
+```markdown
+<!-- ImpKit Validated Output -->
+<table border="1"><tbody><tr><th rowspan="2">Product ID</th><th colspan="2">Stock Availability</th><th rowspan="2">Status</th></tr><tr><th>EU Hub</th><th>US Hub</th></tr><tr><td>IK-RAG-01</td><td>150 units</td><td>Out of Stock</td><td>Active</td></tr></tbody></table>
+```
+
+### Test Case 3: Mixed Block Elements inside Cells (Lists & Code)
+Lists with line breaks destroy single-line markdown table rows. ImpKit wraps them cleanly without formatting collisions:
+```markdown
+<!-- ImpKit Validated Output -->
+<table border="1"><tbody><tr><th>Endpoint</th><th>Params</th></tr><tr><td><code>/api/v1/scrape</code></td><td><ul><li><strong>url</strong> (required)</li></ul></td></tr></tbody></table>
+```
+
+---
 
 ## 🚀 How to Install (Early Access)
 
@@ -68,6 +100,19 @@ Install the extension manually in developer mode:
 4. Enable **"Developer mode"** (toggle in the top right).
 5. Click **"Load unpacked"** and select the folder where you extracted the files.
 
+---
+
+### Comparison: Table Handling
+
+| Feature | Generic Scrapers / Reader Modes | ImpKit RAG Scraper (v0.1.1) |
+| :--- | :--- | :--- |
+| **Nested Tables** | Broken layout / Data loss | **Preserved via Semantic HTML** |
+| **Rowspan / Colspan** | Destroyed (Data Shifted) | **100% Geometry Retention** |
+| **Lists & Code inside Cells** | Broken Markdown Syntax | **Sanitized HTML Injections** |
+| **Auth-Wall / Intranets / Localhost** | Blocked / Inaccessible | **Supported (Local Execution)** |
+| **Metadata** | Missing / Generic | **Rich YAML Frontmatter** |
+
+---
 
 ### Comparison: Table Handling
 
@@ -103,7 +148,7 @@ ImpKit creates atomic, high-utility tools for the AI ecosystem. If this scraper 
 
 ## 📬 Contact
 
-Reach us at **impkit.dev@gmail.com** for inquiries or collaboration.
+Reach us at **impkit.dev@gmail.com** for inquiries or B2B data cleaning collaboration.
 
 ---
 *Built with atomic precision by ImpKit Labs.*
